@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'home.dart';
 import 'profile.dart';
+import 'productdetail/popup.dart';
 import '/appbar.dart';
 import '/navbar.dart';
 
@@ -27,7 +28,7 @@ class ProductPage extends State<Product> {
     'images/donat.png',
   ];
 
-  final List<String> Product = [
+  final List<String> ProductName = [
     'Fcukin Donuts Blueberry',
     'Fcukin Donuts Strawberry',
     'Fcukin Donuts Cerry',
@@ -40,6 +41,18 @@ class ProductPage extends State<Product> {
     'Fcukin Donuts Gorengan Mbak Yayuk',
   ];
 
+  final List<String> ProductPrice = [
+    'Rp.150.000,00',
+    'Rp.100.000,00',
+    'Rp.50.000,00',
+    'Rp.375.000,00',
+    'Rp.40.000,00',
+    'Rp.250.000,00',
+    'Rp.350.000,00',
+    'Rp.50.000,00',
+    'Rp.70.000,00',
+    'Rp.80.000,00',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,38 +122,51 @@ class ProductPage extends State<Product> {
                     ),
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        return Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Positioned(
-                              top: constraints.maxHeight * 0.15,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(MyImages[index]),
-                                    fit: BoxFit.contain,
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                //untuk buka class popup(munculin popup detail produk)
+                                return PopUp(index: index);
+                              },
+                            );
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              //gambar produk
+                              Positioned(
+                                top: constraints.maxHeight * 0.15,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(MyImages[index]),
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
-                                ),
-                                width: constraints.maxWidth * 0.7,
-                                height: constraints.maxHeight * 0.4,
-                              ),
-                            ),
-                            Positioned(
-                              top: constraints.maxHeight * 0.65,
-                              child: Container(
-                                width: constraints.maxWidth * 0.9,
-                                child: Text(
-                                  Product[index],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: constraints.maxWidth * 0.08,
-                                    color: Colors.white,
-                                  ),
+                                  width: constraints.maxWidth * 0.7,
+                                  height: constraints.maxHeight * 0.4,
                                 ),
                               ),
-                            ),
-                          ],
+                              //nama produk
+                              Positioned(
+                                top: constraints.maxHeight * 0.65,
+                                child: Container(
+                                  width: constraints.maxWidth * 0.9,
+                                  child: Text(
+                                    ProductName[index],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: constraints.maxWidth * 0.08,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -155,63 +181,3 @@ class ProductPage extends State<Product> {
     );
   }
 }
-
-// class Product extends StatefulWidget {
-//   const Product({super.key});
-
-//   @override
-//   State<Product> createState() => ProductPage();
-// }
-
-// class ProductPage extends State<Product> {
-//   final List<Container> myList = List.generate(10, (index) {
-//     return Container(
-//       child: Center(
-//         child: Text(
-//           "Gambar Produk",
-//           style: TextStyle(
-//             color: Colors.black,
-//           ),
-//         ),
-//       ),
-//       color: Colors.blue,
-//     );
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.white,
-//         title: Center(
-//           child: Text(
-//             "Product",
-//             style: TextStyle(
-//               color: Colors.black,
-//             ),
-//           ),
-//         ),
-//       ),
-//       body: Column(
-//         children: [
-//           Expanded(
-//             child: GridView.builder(
-//               padding: EdgeInsets.all(20),
-//               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                 crossAxisCount: 2,
-//                 crossAxisSpacing: 20,
-//                 mainAxisSpacing: 20,
-//                 childAspectRatio: 1.0,
-//               ),
-//               itemCount: myList.length,
-//               itemBuilder: (context, index) {
-//                 return myList[index];
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//       bottomNavigationBar: navbar(),
-//     );
-//   }
-// }

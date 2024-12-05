@@ -34,7 +34,7 @@ class appbarproduct extends StatelessWidget implements PreferredSizeWidget {
                 color: Color.fromRGBO(40, 116, 234, 1),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, "LogOut");
+                Navigator.pushNamed(context, "Login");
               },
             ),
           ),
@@ -75,7 +75,7 @@ class appbarproduct extends StatelessWidget implements PreferredSizeWidget {
               ),
               child: IconButton(
                 icon: Icon(
-                  Icons.shopping_cart_checkout_outlined,
+                  Icons.shopping_cart_outlined,
                   color: Color.fromRGBO(40, 116, 234, 1),
                 ),
                 onPressed: () {
@@ -149,7 +149,7 @@ class appbarhome extends StatelessWidget implements PreferredSizeWidget {
                   color: Color.fromRGBO(40, 116, 234, 1),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "LogOut");
+                  Navigator.pushNamed(context, "Login");
                 },
               ),
             ),
@@ -190,7 +190,7 @@ class appbarhome extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: IconButton(
                   icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
+                    Icons.shopping_cart_outlined,
                     color: Color.fromRGBO(40, 116, 234, 1),
                   ),
                   onPressed: () {
@@ -265,7 +265,7 @@ class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
                   color: Color.fromRGBO(40, 116, 234, 1),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "LogOut");
+                  Navigator.pushNamed(context, "Login");
                 },
               ),
             ),
@@ -306,7 +306,7 @@ class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: IconButton(
                   icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
+                    Icons.shopping_cart_outlined,
                     color: Color.fromRGBO(40, 116, 234, 1),
                   ),
                   onPressed: () {
@@ -356,7 +356,7 @@ class appbarcart extends StatelessWidget implements PreferredSizeWidget {
                   color: Color.fromRGBO(40, 116, 234, 1),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "LogOut");
+                  Navigator.pushNamed(context, "Login");
                 },
               ),
             ),
@@ -397,7 +397,7 @@ class appbarcart extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: IconButton(
                   icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
+                    Icons.shopping_cart_outlined,
                     color: Color.fromRGBO(40, 116, 234, 1),
                   ),
                   onPressed: () {

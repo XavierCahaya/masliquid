@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/cupertino.dart';
 import 'product.dart';
 import 'profile.dart';
-import 'productdetail/product1.dart';
+import 'productdetail/popup.dart';
 import '/appbar.dart';
 import '/navbar.dart';
 
@@ -29,7 +29,7 @@ class HomePage extends State<Home> {
     'images/donat.png',
   ];
 
-  final List<String> Product = [
+  final List<String> ProductName = [
     'Fcukin Donuts Blueberry',
     'Fcukin Donuts Strawberry',
     'Fcukin Donuts Cerry',
@@ -42,6 +42,18 @@ class HomePage extends State<Home> {
     'Fcukin Donuts Gorengan Mbak Yayuk',
   ];
 
+  final List<String> ProductPrice = [
+    'Rp.150.000,00',
+    'Rp.100.000,00',
+    'Rp.50.000,00',
+    'Rp.375.000,00',
+    'Rp.40.000,00',
+    'Rp.250.000,00',
+    'Rp.350.000,00',
+    'Rp.50.000,00',
+    'Rp.70.000,00',
+    'Rp.80.000,00',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,99 +147,18 @@ class HomePage extends State<Home> {
                       builder: (context, constraints) {
                         return GestureDetector(
                           onTap: () {
-                            showCupertinoModalPopup(
-                                context: context,
-                                builder: (BuildContext builder) {
-                                  return CupertinoPopupSurface(
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Color.fromRGBO(166, 236, 255, 1),
-                                              Color.fromRGBO(7, 201, 255, 1),
-                                              Color.fromRGBO(40, 116, 234, 1),
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                          ),
-                                        ),
-                                        alignment: Alignment.center,
-                                        width: 400,
-                                        height: 400,
-                                        child: Stack(
-                                          children: [
-                                            ///jek progres, ojo diubah
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                SizedBox(height: 20),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 10,
-                                                        offset: Offset(0, 3),
-                                                      ),
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: Colors.white,
-                                                  ),
-                                                  child: Image.asset(
-                                                    MyImages[index],
-                                                    width: 200,
-                                                    height: 200,
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 20),
-                                                Text(
-                                                  Product[index],
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 20),
-                                                Container(
-                                                  width: 350,
-                                                  height: 100,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 10,
-                                                        offset: Offset(0, 3),
-                                                      ),
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )),
-                                  );
-                                  ///jek progres, ojo diubah
-                                });
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                //untuk buka class popup(munculin popup detail produk)
+                                return PopUp(index: index);
+                              },
+                            );
                           },
-
-                          ///////////
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
+                              //gambar produk
                               Positioned(
                                 top: constraints.maxHeight * 0.15,
                                 child: Container(
@@ -241,12 +172,13 @@ class HomePage extends State<Home> {
                                   height: constraints.maxHeight * 0.4,
                                 ),
                               ),
+                              //nama produk
                               Positioned(
                                 top: constraints.maxHeight * 0.65,
                                 child: Container(
                                   width: constraints.maxWidth * 0.9,
                                   child: Text(
-                                    Product[index],
+                                    ProductName[index],
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
