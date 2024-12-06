@@ -3,7 +3,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/cupertino.dart';
 import 'product.dart';
-import 'profile.dart';
 import 'productdetail/popup.dart';
 import '/appbar.dart';
 import '/navbar.dart';

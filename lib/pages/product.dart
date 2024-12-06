@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'home.dart';
-import 'profile.dart';
 import 'productdetail/popup.dart';
 import '/appbar.dart';
 import '/navbar.dart';
