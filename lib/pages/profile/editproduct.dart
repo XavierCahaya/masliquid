@@ -36,13 +36,13 @@ class EditProductPage extends State<EditProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbareditproduk(),
+      appBar: const appbareditproduk(),
       body: Stack(
         children: [
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: Color.fromRGBO(7, 201, 255, 1),
+            color: const Color.fromRGBO(7, 201, 255, 1),
           ),
           Positioned(
             bottom: 0,
@@ -51,7 +51,7 @@ class EditProductPage extends State<EditProduct> {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.8,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -59,17 +59,17 @@ class EditProductPage extends State<EditProduct> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       TextFormField(
                         initialValue: productName,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           label: Text('Product Name'),
                         ),
                         onChanged: (Value) => productName = Value,
@@ -80,7 +80,7 @@ class EditProductPage extends State<EditProduct> {
                           return null;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       GestureDetector(
@@ -96,7 +96,7 @@ class EditProductPage extends State<EditProduct> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: _imageFile == null
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.upload,
                                       size: 40,
                                       color: Colors.grey,
@@ -112,7 +112,7 @@ class EditProductPage extends State<EditProduct> {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.upload,
                               size: 30,
                               color: Colors.white,
@@ -122,7 +122,7 @@ class EditProductPage extends State<EditProduct> {
                       ),
                       TextFormField(
                         initialValue: productPrice,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           label: Text('Harga'),
                         ),
                         onChanged: (Value) => productPrice = Value,
@@ -133,7 +133,7 @@ class EditProductPage extends State<EditProduct> {
                           return null;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       DropdownButtonFormField(
@@ -146,34 +146,37 @@ class EditProductPage extends State<EditProduct> {
                         }).toList(),
                         onChanged: (newValue) =>
                             setState(() => category = newValue!),
-                        decoration: InputDecoration(labelText: 'category'),
+                        decoration:
+                            const InputDecoration(labelText: 'category'),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextFormField(
                         initialValue: description,
                         maxLines: 3,
-                        decoration: InputDecoration(labelText: 'Deskripsi'),
+                        decoration:
+                            const InputDecoration(labelText: 'Deskripsi'),
                         onChanged: (value) => description = value,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(7, 201, 255, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(7, 201, 255, 1),
                               shape: BeveledRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           onPressed: () {
                             if (FormUpdate.currentState!.validate()) {
                               // Logika simpan data
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                     content:
                                         Text('Produk berhasil diperbarui')),
                               );
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             'Simpan',
                             style: TextStyle(color: Colors.white),
                           ),

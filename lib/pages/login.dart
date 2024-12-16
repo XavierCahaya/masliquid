@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'home.dart';
-import 'signup.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -22,7 +19,7 @@ class LoginPage extends State<Login> {
             Container(
               height: 680,
               width: 1000,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Color.fromRGBO(166, 236, 255, 1),
@@ -37,11 +34,11 @@ class LoginPage extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 50, bottom: 20),
+                    padding: const EdgeInsets.only(top: 50, bottom: 20),
                     child: Container(
                       width: 150,
                       height: 150,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('images/LOGO.png'),
                           fit: BoxFit.cover,
@@ -53,7 +50,7 @@ class LoginPage extends State<Login> {
                     width: 350,
                     height: 400,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(99, 255, 254, 254),
+                      color: const Color.fromARGB(99, 255, 254, 254),
                       border: Border.all(
                         color: Colors.white,
                         width: 2.0,
@@ -69,7 +66,7 @@ class LoginPage extends State<Login> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Sign In',
                               style: TextStyle(
@@ -80,7 +77,7 @@ class LoginPage extends State<Login> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Container(
                           width: 280,
                           height: 30,
@@ -88,7 +85,7 @@ class LoginPage extends State<Login> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.only(top: 10, left: 10),
                             child: Text(
                               'Username',
@@ -100,7 +97,7 @@ class LoginPage extends State<Login> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Container(
                           width: 280,
                           height: 30,
@@ -108,7 +105,7 @@ class LoginPage extends State<Login> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.only(top: 10, left: 10),
                             child: Text(
                               'Password',
@@ -120,7 +117,7 @@ class LoginPage extends State<Login> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, "Home");
@@ -136,7 +133,7 @@ class LoginPage extends State<Login> {
                                 width: 2.0,
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 'Submit',
                                 style: TextStyle(
@@ -148,14 +145,14 @@ class LoginPage extends State<Login> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Container(
+                        const SizedBox(height: 20),
+                        SizedBox(
                           width: 280,
                           height: 30,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "Don't have an account?",
                                 style: TextStyle(
                                   fontSize: 12,
@@ -163,12 +160,12 @@ class LoginPage extends State<Login> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 3),
+                              const SizedBox(width: 3),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pushNamed(context, "SignUp");
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Sign Up',
                                   style: TextStyle(
                                     fontSize: 12,
@@ -180,19 +177,21 @@ class LoginPage extends State<Login> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
                           width: 170,
                           height: 2,
                           color: Colors.white,
                         ),
-                        SizedBox(height: 10),
-                        Container(
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          width: 200,
+                          height: 30,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('images/google.png'),
                                     fit: BoxFit.contain,
@@ -201,8 +200,8 @@ class LoginPage extends State<Login> {
                                 height: 20,
                                 width: 30,
                               ),
-                              SizedBox(width: 2),
-                              Text(
+                              const SizedBox(width: 2),
+                              const Text(
                                 'Continue with google',
                                 style: TextStyle(
                                   fontSize: 12,
@@ -212,8 +211,6 @@ class LoginPage extends State<Login> {
                               )
                             ],
                           ),
-                          width: 200,
-                          height: 30,
                         ),
                       ],
                     ),

@@ -3,10 +3,12 @@ import 'package:masliquid/appbar.dart';
 import 'package:masliquid/pages/profile/historydetail.dart';
 
 class History extends StatelessWidget {
+  const History({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarhistory(),
+      appBar: const appbarhistory(),
       body: Stack(
         children: [
           // Latar belakang hitam
@@ -19,7 +21,7 @@ class History extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 40,
-            color: Color.fromRGBO(7, 201, 255, 1),
+            color: const Color.fromRGBO(7, 201, 255, 1),
           ),
           // ListView dengan Positioned
           Positioned(
@@ -28,40 +30,41 @@ class History extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView(
                 children: List.generate(10, (index) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Card(
-                      color: Color.fromRGBO(7, 201, 255, 1),
+                      color: const Color.fromRGBO(7, 201, 255, 1),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextButton(
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return HistoryDetail();
+                                  return const HistoryDetail();
                                 },
                               ),
                             );
                           },
                           child: ListTile(
-                            leading:
-                                Icon(Icons.shopping_bag, color: Colors.white),
+                            leading: const Icon(Icons.shopping_bag,
+                                color: Colors.white),
                             title: Text(
                               'Item Barang ${index + 3}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             subtitle: Text(
-                              'Tanggal: 05-0${index}-2024',
-                              style: TextStyle(color: Colors.white),
+                              'Tanggal: 05-0$index-2024',
+                              style: const TextStyle(color: Colors.white),
                             ),
-                            trailing: Icon(Icons.info, color: Colors.white),
+                            trailing:
+                                const Icon(Icons.info, color: Colors.white),
                           ),
                         ),
                       ),

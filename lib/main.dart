@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masliquid/pages/product/product.dart';
 import 'package:masliquid/pages/profile/editprofile.dart';
 import 'package:masliquid/pages/profile/history.dart';
 import 'package:masliquid/pages/profile/profile.dart';
@@ -6,30 +7,27 @@ import 'splashscreen.dart';
 import 'pages/login.dart';
 import 'pages/signup.dart';
 import 'pages/home.dart';
-import 'pages/product.dart';
-import 'pages/cart.dart';
-import 'pages/productdetail/popup.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: const SplashScreen(),
       routes: {
-        "Home": (context) => Home(),
-        "Product": (context) => Product(),
-        "Profile": (context) => Profile(),
-        "Login": (context) => Login(),
-        "Cart": (context) => Cart(),
-        "ProductDetail": (context) => PopUp(index: 0),
-        "SignUp": (context) => SignUp(),
-        "ProfileHistory": (context) => History(),
-        "EditProfile": (context) => EditProfile(),
+        "Home": (context) => const Home(),
+        "Profile": (context) => const Profile(),
+        "Login": (context) => const Login(),
+        "Produk": (context) => const ListProduct(),
+        "SignUp": (context) => const SignUp(),
+        "ProfileHistory": (context) => const History(),
+        "EditProfile": (context) => const EditProfile(),
       },
     );
   }

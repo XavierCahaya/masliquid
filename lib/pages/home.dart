@@ -1,205 +1,188 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/cupertino.dart';
-import 'product.dart';
-import 'productdetail/popup.dart';
-import '/appbar.dart';
-import '/navbar.dart';
+import 'package:masliquid/appbar.dart';
+import 'package:masliquid/navbar.dart';
+import 'package:masliquid/pages/product/detail.dart';
+import 'package:masliquid/models/listproduct.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => HomePage();
+  ListProductHome createState() => ListProductHome();
 }
 
-class HomePage extends State<Home> {
-  final List<String> MyImages = [
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-    'images/donat.png',
-  ];
+class ListProductHome extends State<Home> {
+  void addToCart(Product product) {
+    setState(() {
+      cart.add(product);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text('${product.name} telah ditambahkan ke keranjang.')),
+    );
+  }
 
-  final List<String> ProductName = [
-    'Fcukin Donuts Blueberry',
-    'Fcukin Donuts Strawberry',
-    'Fcukin Donuts Cerry',
-    'Fcukin Donuts Ice Tea',
-    'Fcukin Donuts Melon',
-    'Fcukin Donuts Banana',
-    'Fcukin Donuts Teh Cina',
-    'Fcukin Donuts Sego Goreng',
-    'Fcukin Donuts Sate Pak Lis',
-    'Fcukin Donuts Gorengan Mbak Yayuk',
-  ];
+  void showProductDetails(Product product) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ShowProductDetails(
+          product: product,
+          addToCart: addToCart,
+        );
+      },
+    );
+  }
 
-  final List<String> ProductPrice = [
-    'Rp.150.000,00',
-    'Rp.100.000,00',
-    'Rp.50.000,00',
-    'Rp.375.000,00',
-    'Rp.40.000,00',
-    'Rp.250.000,00',
-    'Rp.350.000,00',
-    'Rp.50.000,00',
-    'Rp.70.000,00',
-    'Rp.80.000,00',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarhome(),
-      body: Column(
-        children: [
-          //search
-          Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(40),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: 30,
-                  color: Colors.white,
+      appBar: appbarhome(keranjang: cart),
+      body: Column(children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                color: Colors.white,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 40,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 10, top: 5, bottom: 5),
-                    child: Text(
-                      'Search',
-                      style: TextStyle(
-                        color: Color.fromARGB(150, 0, 0, 0),
+                    padding: EdgeInsets.only(top: 0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        hintText: "Search Disini...",
+                        hintStyle: TextStyle(fontSize: 15),
+                        prefixIcon: const Icon(Icons.search),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
+                      onChanged: (value) {
+                        print("Search query: $value");
+                      },
                     ),
                   ),
                 ),
               ),
             ),
           ),
+        ),
 
-          //gambar promo tengah
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: AspectRatio(
-              aspectRatio: 352 / 118,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('images/homepromo.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                },
+        // Gambar promo tengah
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: AspectRatio(
+            aspectRatio: 352 / 118,
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/homepromo.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-
-          //kabeh grid produk
-          Expanded(
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: GridView.builder(
-              padding: EdgeInsets.all(20),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                childAspectRatio: 1.0,
+                childAspectRatio: 0.7,
               ),
-              itemCount: MyImages.length,
+              itemCount: products.length,
               itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromRGBO(166, 236, 255, 1),
-                          Color.fromRGBO(7, 201, 255, 1),
-                          Color.fromRGBO(40, 116, 234, 1),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                //untuk buka class popup(munculin popup detail produk)
-                                return PopUp(index: index);
-                              },
-                            );
-                          },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              //gambar produk
-                              Positioned(
-                                top: constraints.maxHeight * 0.15,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(MyImages[index]),
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                  width: constraints.maxWidth * 0.7,
-                                  height: constraints.maxHeight * 0.4,
-                                ),
-                              ),
-                              //nama produk
-                              Positioned(
-                                top: constraints.maxHeight * 0.65,
-                                child: Container(
-                                  width: constraints.maxWidth * 0.9,
-                                  child: Text(
-                                    ProductName[index],
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: constraints.maxWidth * 0.08,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                final product = products[index];
+                return GestureDetector(
+                  onTap: () => showProductDetails(product),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromRGBO(166, 236, 255, 1),
+                              Color.fromRGBO(7, 201, 255, 1),
+                              Color.fromRGBO(40, 116, 234, 1),
                             ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
-                        );
-                      },
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                top: 0,
+                                right: 0,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: IconButton(
+                                    icon: const Icon(
+                                      Icons.add_shopping_cart_sharp,
+                                    ),
+                                    onPressed: () => addToCart(product),
+                                  ),
+                                )),
+                            Center(
+                              child: SizedBox(
+                                width: 125,
+                                height: 125,
+                                child: Image.asset(
+                                  product.image,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 30,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Center(
+                                  child: Text(
+                                    maxLines: 2,
+                                    product.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 15, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Center(
+                                child: Text(
+                                    'Rp${product.price.toStringAsFixed(3)}',
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 15)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 );
               },
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: navbar(),
+        ),
+      ]),
+      bottomNavigationBar: const navbar(),
     );
   }
 }

@@ -35,7 +35,7 @@ class AddProductPage extends State<AddProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbaraddproduk(),
+      appBar: const appbaraddproduk(),
       body: Stack(
         children: [
           Container(
@@ -50,7 +50,7 @@ class AddProductPage extends State<AddProduct> {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.8,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),

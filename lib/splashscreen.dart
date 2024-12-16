@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'pages/home.dart';
-import 'pages/login.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
   _SplashScreen createState() => _SplashScreen();
 }
 
 class _SplashScreen extends State<SplashScreen> {
+  @override
   void initState() {
     super.initState();
     splashscreenStart();
@@ -20,7 +23,7 @@ class _SplashScreen extends State<SplashScreen> {
       () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Login()),
+          MaterialPageRoute(builder: (context) => const Home()),
         );
       },
     );
@@ -35,7 +38,7 @@ class _SplashScreen extends State<SplashScreen> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Color.fromRGBO(166, 236, 255, 1),
@@ -48,7 +51,7 @@ class _SplashScreen extends State<SplashScreen> {
               ),
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 height: 200,
                 width: 200,
                 child: Center(

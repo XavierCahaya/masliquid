@@ -16,13 +16,13 @@ class ProfilePage extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarprofile(),
+      appBar: const appbarprofile(),
       body: Stack(
         children: [
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: Color.fromRGBO(7, 201, 255, 1),
+            color: const Color.fromRGBO(7, 201, 255, 1),
           ),
           Positioned(
             bottom: 0,
@@ -31,7 +31,7 @@ class ProfilePage extends State<Profile> {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.7,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -39,23 +39,23 @@ class ProfilePage extends State<Profile> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(right: 20, left: 20, top: 120),
+                padding: const EdgeInsets.only(right: 20, left: 20, top: 120),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 16),
+                        padding: const EdgeInsets.only(top: 16),
                         child: Container(
                           width: double.infinity,
                           height: 50,
-                          color: Color.fromRGBO(7, 201, 255, 1),
+                          color: const Color.fromRGBO(7, 201, 255, 1),
                           child: TextButton(
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return DashboardAdmin();
+                                    return const DashboardAdmin();
                                   },
                                 ),
                               );
@@ -67,8 +67,8 @@ class ProfilePage extends State<Profile> {
                                 Container(
                                   width: double.infinity,
                                   height: 50,
-                                  color: Color.fromRGBO(7, 201, 255, 1),
-                                  child: Row(
+                                  color: const Color.fromRGBO(7, 201, 255, 1),
+                                  child: const Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
@@ -82,7 +82,7 @@ class ProfilePage extends State<Profile> {
                                     ],
                                   ),
                                 ),
-                                Positioned(
+                                const Positioned(
                                   right: 20,
                                   child: CircleAvatar(
                                     radius: 30,
@@ -105,19 +105,19 @@ class ProfilePage extends State<Profile> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Padding(
-                        padding: EdgeInsets.only(top: 16),
+                        padding: const EdgeInsets.only(top: 16),
                         child: Container(
                           width: double.infinity,
                           height: 50,
-                          color: Color.fromRGBO(7, 201, 255, 1),
+                          color: const Color.fromRGBO(7, 201, 255, 1),
                           child: TextButton(
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return History();
+                                    return const History();
                                   },
                                 ),
                               );
@@ -129,8 +129,8 @@ class ProfilePage extends State<Profile> {
                                 Container(
                                   width: double.infinity,
                                   height: 50,
-                                  color: Color.fromRGBO(7, 201, 255, 1),
-                                  child: Row(
+                                  color: const Color.fromRGBO(7, 201, 255, 1),
+                                  child: const Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
@@ -144,7 +144,7 @@ class ProfilePage extends State<Profile> {
                                     ],
                                   ),
                                 ),
-                                Positioned(
+                                const Positioned(
                                   right: 20,
                                   child: CircleAvatar(
                                     radius: 30,
@@ -167,8 +167,8 @@ class ProfilePage extends State<Profile> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      TextField(
+                      const SizedBox(height: 16),
+                      const TextField(
                         enabled: false,
                         cursorColor: Color.fromRGBO(7, 201, 255, 1),
                         decoration: InputDecoration(
@@ -177,8 +177,8 @@ class ProfilePage extends State<Profile> {
                           prefixIcon: Icon(Icons.email),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      TextField(
+                      const SizedBox(height: 16),
+                      const TextField(
                         obscureText: true,
                         enabled: false,
                         cursorColor: Color.fromRGBO(7, 201, 255, 1),
@@ -188,8 +188,8 @@ class ProfilePage extends State<Profile> {
                           prefixIcon: Icon(Icons.phone_android),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      TextField(
+                      const SizedBox(height: 16),
+                      const TextField(
                         obscureText: true,
                         enabled: false,
                         cursorColor: Color.fromRGBO(7, 201, 255, 1),
@@ -200,9 +200,9 @@ class ProfilePage extends State<Profile> {
                           prefixIcon: Icon(Icons.home),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
                           width: double.infinity,
                           height: 50,
@@ -212,12 +212,12 @@ class ProfilePage extends State<Profile> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return EditProfile();
+                                    return const EditProfile();
                                   },
                                 ),
                               );
                             },
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               'Edit Profile',
                               style: TextStyle(
@@ -246,16 +246,16 @@ class ProfilePage extends State<Profile> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 4),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage('images/ireng.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Container(
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     'Hallo Ireeenggg',
                     style: TextStyle(
                       fontSize: 20,
@@ -263,13 +263,13 @@ class ProfilePage extends State<Profile> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ]),
             ),
           ),
         ],
       ),
-      bottomNavigationBar: navbar(),
+      bottomNavigationBar: const navbar(),
     );
   }
 }

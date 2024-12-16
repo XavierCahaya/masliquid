@@ -12,13 +12,13 @@ class EditProfilePage extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbareditprofile(),
+      appBar: const appbareditprofile(),
       body: Stack(
         children: [
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: Color.fromRGBO(7, 201, 255, 1),
+            color: const Color.fromRGBO(7, 201, 255, 1),
           ),
           Positioned(
             bottom: 0,
@@ -27,7 +27,7 @@ class EditProfilePage extends State<EditProfile> {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.8,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -42,9 +42,9 @@ class EditProfilePage extends State<EditProfile> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(height: 16),
-                      TextField(
-                        cursorColor: const Color.fromRGBO(7, 201, 255, 1),
-                        decoration: const InputDecoration(
+                      const TextField(
+                        cursorColor: Color.fromRGBO(7, 201, 255, 1),
+                        decoration: InputDecoration(
                           labelText: 'Nama',
                           hintText: 'Masukkan nama lengkap Anda',
                           prefixIcon: Icon(Icons.person),
@@ -52,9 +52,9 @@ class EditProfilePage extends State<EditProfile> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      TextField(
-                        cursorColor: const Color.fromRGBO(7, 201, 255, 1),
-                        decoration: const InputDecoration(
+                      const TextField(
+                        cursorColor: Color.fromRGBO(7, 201, 255, 1),
+                        decoration: InputDecoration(
                           labelText: 'Email',
                           hintText: 'Masukkan email Anda',
                           prefixIcon: Icon(Icons.email),
@@ -62,10 +62,10 @@ class EditProfilePage extends State<EditProfile> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      TextField(
+                      const TextField(
                         keyboardType: TextInputType.phone,
-                        cursorColor: const Color.fromRGBO(7, 201, 255, 1),
-                        decoration: const InputDecoration(
+                        cursorColor: Color.fromRGBO(7, 201, 255, 1),
+                        decoration: InputDecoration(
                           labelText: 'Nomor Telepon',
                           hintText: 'Masukkan nomor telepon Anda',
                           prefixIcon: Icon(Icons.phone_android),
@@ -73,9 +73,9 @@ class EditProfilePage extends State<EditProfile> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      TextField(
-                        cursorColor: const Color.fromRGBO(7, 201, 255, 1),
-                        decoration: const InputDecoration(
+                      const TextField(
+                        cursorColor: Color.fromRGBO(7, 201, 255, 1),
+                        decoration: InputDecoration(
                           labelText: 'Alamat',
                           hintText: 'Masukkan alamat Anda',
                           prefixIcon: Icon(Icons.location_on),
@@ -83,10 +83,10 @@ class EditProfilePage extends State<EditProfile> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      TextField(
+                      const TextField(
                         obscureText: true,
-                        cursorColor: const Color.fromRGBO(7, 201, 255, 1),
-                        decoration: const InputDecoration(
+                        cursorColor: Color.fromRGBO(7, 201, 255, 1),
+                        decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Masukkan password baru',
                           prefixIcon: Icon(Icons.lock),

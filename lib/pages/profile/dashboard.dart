@@ -4,6 +4,8 @@ import 'package:masliquid/pages/profile/addproduct.dart';
 import 'package:masliquid/pages/profile/editproduct.dart';
 
 class DashboardAdmin extends StatefulWidget {
+  const DashboardAdmin({super.key});
+
   @override
   State<DashboardAdmin> createState() => _DashboardAdminState();
 }
@@ -23,7 +25,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
       data.removeAt(index);
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Produk berhasil dihapus')),
+      const SnackBar(content: Text('Produk berhasil dihapus')),
     );
   }
 
@@ -60,7 +62,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbardashboard(),
+      appBar: const appbardashboard(),
       body: Stack(
         children: [
           Container(
@@ -77,7 +79,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.8,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -100,7 +102,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                           horizontal: 30, vertical: 10),
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             height: 40,
                             child: TextField(
@@ -129,7 +131,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => AddProduct(),
+                                      builder: (context) => const AddProduct(),
                                     ),
                                   );
                                 },
@@ -180,20 +182,20 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                       Row(
                                         children: [
                                           IconButton(
-                                            icon: Icon(Icons.edit,
+                                            icon: const Icon(Icons.edit,
                                                 color: Colors.blue),
                                             onPressed: () {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EditProduct(),
+                                                      const EditProduct(),
                                                 ),
                                               );
                                             },
                                           ),
                                           IconButton(
-                                            icon: Icon(Icons.delete,
+                                            icon: const Icon(Icons.delete,
                                                 color: Colors.red),
                                             onPressed: () {
                                               KonfimasiDelete(index);
@@ -218,15 +220,6 @@ class _DashboardAdminState extends State<DashboardAdmin> {
           Padding(
             padding: const EdgeInsets.only(right: 30, left: 30, top: 10),
             child: Container(
-              child: Center(
-                child: ListTile(
-                  leading: const Text(
-                    'Hallo, Admin Ireng!',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                  trailing: const Icon(Icons.person),
-                ),
-              ),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -241,6 +234,15 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               ),
               width: double.infinity,
               height: 40,
+              child: const Center(
+                child: ListTile(
+                  leading: Text(
+                    'Hallo, Admin Ireng!',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                  trailing: Icon(Icons.person),
+                ),
+              ),
             ),
           ),
         ],

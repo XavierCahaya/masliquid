@@ -1,18 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:masliquid/pages/product/cart.dart';
+import 'package:masliquid/models/listproduct.dart';
 
-class appbarproduct extends StatelessWidget implements PreferredSizeWidget {
+class AppBarProduct extends StatelessWidget implements PreferredSizeWidget {
+  final List<Product> cart;
+
+  const AppBarProduct({super.key, required this.cart});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-        backgroundColor: Colors.white,
-        leadingWidth: 60,
-        centerTitle: true,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 20),
+    return AppBar(
+      backgroundColor: Colors.white,
+      leadingWidth: 60,
+      centerTitle: true,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: Color.fromRGBO(40, 116, 234, 1),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, "Login");
+            },
+          ),
+        ),
+      ),
+
+      // Judul
+      title: const Padding(
+        padding: EdgeInsets.only(left: 50),
+        child: Center(
+          child: Text(
+            "Product",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Color.fromRGBO(40, 116, 234, 1),
+            ),
+          ),
+        ),
+      ),
+
+      actions: [
+        // Keranjang Belanja
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
           child: Container(
             width: 40,
             height: 40,
@@ -24,100 +74,232 @@ class appbarproduct extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 10,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
             child: IconButton(
-              icon: Icon(
-                Icons.logout,
-                color: Color.fromRGBO(40, 116, 234, 1),
+              icon: Stack(
+                children: [
+                  const Icon(Icons.shopping_cart, color: Colors.black),
+                  if (cart.isNotEmpty)
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        width: 12,
+                        height: 12,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${cart.length}',
+                            style: const TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
               onPressed: () {
-                Navigator.pushNamed(context, "Login");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartPage(cart: cart),
+                  ),
+                );
               },
             ),
           ),
         ),
 
-        //judul home
-        title: Padding(
-          padding: EdgeInsets.only(left: 50),
-          child: Center(
-            child: Text(
-              "Product",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(40, 116, 234, 1),
+        // Profil Pengguna
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              image: const DecorationImage(
+                image: AssetImage('images/ireng.jpg'),
+                fit: BoxFit.cover,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
           ),
         ),
-
-        //border lingkaran keranjang
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Color.fromRGBO(40, 116, 234, 1),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, "Cart");
-                },
-              ),
-            ),
-          ),
-
-          //border profil
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage('images/ireng.jpg'),
-                  fit: BoxFit.cover,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      )),
+      ],
     );
   }
 }
 
 class appbarhome extends StatelessWidget implements PreferredSizeWidget {
+  final List<Product> keranjang;
+
+  const appbarhome({super.key, required this.keranjang});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leadingWidth: 60,
+      centerTitle: true,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: Color.fromRGBO(40, 116, 234, 1),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, "Login");
+            },
+          ),
+        ),
+      ),
+
+      // Judul
+      title: const Padding(
+        padding: EdgeInsets.only(left: 50),
+        child: Center(
+          child: Text(
+            "Home",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Color.fromRGBO(40, 116, 234, 1),
+            ),
+          ),
+        ),
+      ),
+
+      actions: [
+        // Keranjang Belanja
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: IconButton(
+              icon: Stack(
+                children: [
+                  const Icon(Icons.shopping_cart, color: Colors.black),
+                  if (keranjang.isNotEmpty)
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        width: 12,
+                        height: 12,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${keranjang.length}',
+                            style: const TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartPage(cart: keranjang),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+
+        // Profil Pengguna
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              image: const DecorationImage(
+                image: AssetImage('images/ireng.jpg'),
+                fit: BoxFit.cover,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class appbarcart extends StatelessWidget implements PreferredSizeWidget {
+  const appbarcart({super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -126,41 +308,22 @@ class appbarhome extends StatelessWidget implements PreferredSizeWidget {
           backgroundColor: Colors.white,
           leadingWidth: 60,
           centerTitle: true,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Color.fromRGBO(40, 116, 234, 1),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, "Login");
-                },
-              ),
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.blue,
             ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
 
           //judul home
-          title: Padding(
-            padding: EdgeInsets.only(left: 50),
+          title: const Padding(
+            padding: EdgeInsets.only(left: 0),
             child: Center(
               child: Text(
-                "Home",
+                "Cart Product",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(40, 116, 234, 1),
@@ -171,45 +334,16 @@ class appbarhome extends StatelessWidget implements PreferredSizeWidget {
 
           //border lingkaran keranjang
           actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Color.fromRGBO(40, 116, 234, 1),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
-                  },
-                ),
-              ),
-            ),
-
             //border profil
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage('images/ireng.jpg'),
                     fit: BoxFit.cover,
                   ),
@@ -218,7 +352,7 @@ class appbarhome extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -232,16 +366,19 @@ class appbarhome extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
+  const appbarprofile({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(7, 201, 255, 1),
+          backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           //judul home
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(left: 30),
             child: Text(
               'Profile',
@@ -251,7 +388,7 @@ class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
           //border lingkaran keranjang
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -263,23 +400,52 @@ class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -291,12 +457,12 @@ class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
@@ -315,15 +481,18 @@ class appbarprofile extends StatelessWidget implements PreferredSizeWidget {
 
 class appbarhistorydetail extends StatelessWidget
     implements PreferredSizeWidget {
+  const appbarhistorydetail({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -331,9 +500,9 @@ class appbarhistorydetail extends StatelessWidget
               Navigator.pop(context);
             },
           ),
-          backgroundColor: Color.fromRGBO(7, 201, 255, 1),
+          backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           //judul
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(left: 0),
             child: Text(
               'Detail History',
@@ -343,7 +512,7 @@ class appbarhistorydetail extends StatelessWidget
           //border lingkaran keranjang
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -355,23 +524,52 @@ class appbarhistorydetail extends StatelessWidget
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -383,12 +581,12 @@ class appbarhistorydetail extends StatelessWidget
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
@@ -406,8 +604,11 @@ class appbarhistorydetail extends StatelessWidget
 }
 
 class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
+  const appbarhistory({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -415,7 +616,7 @@ class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -424,7 +625,7 @@ class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           //judul
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(left: 30),
             child: Text(
               'History',
@@ -434,7 +635,7 @@ class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
           //border lingkaran keranjang
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -446,23 +647,52 @@ class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -474,12 +704,12 @@ class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
@@ -497,8 +727,11 @@ class appbarhistory extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
+  const appbardashboard({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -506,7 +739,7 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -516,7 +749,7 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           //judul
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(left: 0),
             child: Text(
               'Dashboard',
@@ -526,7 +759,7 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
           //border lingkaran keranjang
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -538,23 +771,52 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -566,12 +828,12 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
@@ -582,7 +844,7 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -594,11 +856,11 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 20,
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
@@ -616,8 +878,11 @@ class appbardashboard extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
+  const appbareditproduk({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -625,7 +890,7 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -635,7 +900,7 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           //judul
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(left: 0),
             child: Text(
               'Update',
@@ -645,7 +910,7 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
           //border lingkaran keranjang
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -657,23 +922,52 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -685,12 +979,12 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
@@ -701,7 +995,7 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -713,11 +1007,11 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 20,
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
@@ -735,8 +1029,11 @@ class appbareditproduk extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
+  const appbaraddproduk({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -744,7 +1041,7 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -754,7 +1051,7 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           //judul
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(left: 0),
             child: Text(
               'Tambah Produk',
@@ -763,7 +1060,7 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -775,23 +1072,52 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -803,12 +1129,12 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
@@ -819,7 +1145,7 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -831,11 +1157,11 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 20,
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
@@ -853,17 +1179,20 @@ class appbaraddproduk extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class appbareditprofile extends StatelessWidget implements PreferredSizeWidget {
+  const appbareditprofile({super.key});
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(7, 201, 255, 1),
+          backgroundColor: const Color.fromRGBO(7, 201, 255, 1),
           automaticallyImplyLeading: true,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -872,7 +1201,7 @@ class appbareditprofile extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           //judul
-          title: Padding(
+          title: const Padding(
             padding: EdgeInsets.only(right: 20),
             child: Text(
               'Edit Profile',
@@ -882,7 +1211,7 @@ class appbareditprofile extends StatelessWidget implements PreferredSizeWidget {
           //border lingkaran keranjang
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: Container(
                 width: 40,
                 height: 40,
@@ -894,23 +1223,52 @@ class appbareditprofile extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    color: Color.fromRGBO(7, 201, 255, 1),
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, color: Colors.black),
+                      if (cart.isNotEmpty)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cart.length}',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cart: cart),
+                      ),
+                    );
                   },
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
                 width: 40,
                 height: 40,
@@ -922,134 +1280,18 @@ class appbareditprofile extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Color.fromRGBO(7, 201, 255, 1),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, "LogOut");
                   },
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class appbarcart extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leadingWidth: 60,
-          centerTitle: true,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Color.fromRGBO(40, 116, 234, 1),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, "Login");
-                },
-              ),
-            ),
-          ),
-
-          //judul home
-          title: Padding(
-            padding: EdgeInsets.only(left: 50),
-            child: Center(
-              child: Text(
-                "Cart",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(40, 116, 234, 1),
-                ),
-              ),
-            ),
-          ),
-
-          //border lingkaran keranjang
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Color.fromRGBO(40, 116, 234, 1),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "Cart");
-                  },
-                ),
-              ),
-            ),
-
-            //border profil
-            Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  image: DecorationImage(
-                    image: AssetImage('images/ireng.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
                 ),
               ),
             ),
