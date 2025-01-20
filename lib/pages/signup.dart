@@ -127,7 +127,7 @@ class SignUpPage extends State<SignUp> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Row(
+                            child:  Row(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(left: 10),

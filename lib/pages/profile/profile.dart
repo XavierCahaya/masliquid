@@ -68,7 +68,7 @@ class ProfilePage extends State<Profile> {
                                   width: double.infinity,
                                   height: 50,
                                   color: const Color.fromRGBO(7, 201, 255, 1),
-                                  child: const Row(
+                                  child:  Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
@@ -130,7 +130,7 @@ class ProfilePage extends State<Profile> {
                                   width: double.infinity,
                                   height: 50,
                                   color: const Color.fromRGBO(7, 201, 255, 1),
-                                  child: const Row(
+                                  child:  Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [

@@ -88,7 +88,7 @@ class ShowProductDetails extends StatelessWidget {
               right: 0,
               child: Column(
                 children: [
-                  Image.asset(
+                  Image.network(
                     product.image,
                     width: 200,
                     height: 200,
